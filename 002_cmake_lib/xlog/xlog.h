@@ -11,12 +11,15 @@
 // test_xlog 调用 dllimport（使用）
 // 可以使用宏区分是生成库文件还是使用库文件
 
-#ifdef xlog_EXPORTS
-    #define XCPP_API __declspec(dllexport)    // 库项目调用
+#ifndef _WIN32
+    #define XCPP_API
 #else
-    #define XCPP_API __declspec(dllimport)    // 调用库项目调用
+    #ifdef xlog_EXPORTS
+        #define XCPP_API __declspec(dllexport)    // 库项目调用
+    #else
+        #define XCPP_API __declspec(dllimport)    // 调用库项目调用
+    #endif
 #endif
-
 class XCPP_API XLog {
 public:
     XLog();
