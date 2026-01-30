@@ -3,6 +3,8 @@ project(xlog)
 include_directories("xlog")
 
 # STATIC换SHARED
+# 添加xlog库编译，cmake项目自带预处理变量xlog_EXPORTS（没有就自行传递）
+# 可以使用它来区分我们当前是在生成库还是使用库
 add_library(xlog SHARED xlog/xlog.cpp)
 
 # 无link_directories, 因为是直接生成的, 不需要指定路径了
