@@ -13,6 +13,11 @@
 cmake_minimum_required(VERSION 3.20)
 project("cmake_auto_src")
 
+# 打印详细的编译日志，默认OFF
+#set(CMAKE_VERBOSE_MAKEFILE ON)
+#cmake --build build -v命令
+
+
 set(INCLUDE_PATH "./include")
 
 # 头文件加载路径
