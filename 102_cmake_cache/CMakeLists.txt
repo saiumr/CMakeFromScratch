@@ -50,3 +50,7 @@ set(NVAR1 "cache var1" CACHE STRING "cache doc")
 
 message("NVAR1 = ${NVAR1}")
 message("CACHE NVAR1 = $CACHE{NVAR1}")
+
+# 使用命令行传递缓存变量
+# cmake -S . -B build -D HELLO="hello world"
+message("HELLO = ${HELLO}")
