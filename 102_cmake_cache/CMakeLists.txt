@@ -28,3 +28,9 @@ message("VAR_BOO2 = ${VAR_BOOL2}")
 set(VAR_FILE "FILEPATH" CACHE FILEPATH "var FILEPATH")      # 文件选择
 set(VAR_PATH "FILEPATH" CACHE PATH "var PATH")              # 目录选择
 set(VAR_INTERNAL "INTERNAL" CACHE INTERNAL "var INTERNAL")
+
+option(OPT1 "opt1 doc" OFF)
+option(OPT2 "opt2 doc" ON)
+
+# 使用cmake-gui配置变量
+# ccmake build 控制台配置缓存变量或者可选(option)变量  windows上似乎没有
