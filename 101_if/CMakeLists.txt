@@ -46,3 +46,20 @@ set(VAR_OFF OFF)
 if(NOT VAR_OFF)   # NOT AND OR
     message("NOT VAR_OFF")
 endif()
+
+
+# if一元、二元比较，正则匹配
+# DEFINED EXISTED COMMAND
+# EQUAL ...
+# MATCHES  正则
+set(VAR_DEF OFF)
+if(DEFINED VAR_OFF)
+    message("DEFINED judge")
+endif()
+
+if(1 EQUAL 1)  # 数字比较
+    message("EQUAL judge")
+endif()
+if("happy" STREQUAL "happy")  # 字符串比较
+    message("STREQUAL judge")
+endif()
