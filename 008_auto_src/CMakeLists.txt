@@ -29,3 +29,27 @@ file(GLOB H_FILE "${INCLUDE_PATH}/*.h*")
 
 add_executable(${PROJECT_NAME} ${M_SRC} ${SRC} ${H_FILE})
 
+# targer使用方式（windows中使用nmake或者MinGW，用MSVC貌似没有这些）
+#[[
+cmake --build build --target help
+The following are some of the valid targets for this Makefile:
+... all (the default if no target is provided)
+... clean
+... depend
+... edit_cache
+... rebuild_cache
+... cmake_auto_src
+... main.obj
+... main.i
+... main.s
+... src/xlog.obj
+... src/xlog.i
+... src/xlog.s
+... src/xtest.obj
+... src/xtest.i
+... src/xtest.s
+... src/xthread.obj
+... src/xthread.i
+... src/xthread.s
+]]
+
