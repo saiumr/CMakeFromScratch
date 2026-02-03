@@ -41,3 +41,8 @@ endif()
 if("999")
     message("number string(not 0) is true")
 endif()
+
+set(VAR_OFF OFF)
+if(NOT VAR_OFF)   # NOT AND OR
+    message("NOT VAR_OFF")
+endif()
