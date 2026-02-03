@@ -34,3 +34,19 @@ option(OPT2 "opt2 doc" ON)
 
 # 使用cmake-gui配置变量
 # ccmake build 控制台配置缓存变量或者可选(option)变量  windows上似乎没有
+
+
+message("-----------------------------------------")
+# CACHE覆盖策略设置
+set(NVAR1 "normal var1")
+
+# 设置缓存变量覆盖同名变量的策略
+# OLD 删除同名普通变量
+# NEW 不删除普通变量，要访问cache要用$CACHE{var_name}
+cmake_policy(SET CMP0126 NEW) # OLD NEW，默认OLD
+
+set(NVAR1 "cache var1" CACHE STRING "cache doc")
+
+
+message("NVAR1 = ${NVAR1}")
+message("CACHE NVAR1 = $CACHE{NVAR1}")
