@@ -19,3 +19,12 @@ message("VAR_NORMAL = ${VAR_NORMAL}")
 add_subdirectory(sub1) # 如果在sub1中设置一个变量需要在sub2中使用，就需要缓存变量了
 add_subdirectory(sub2)
 
+
+message("-----------------------------------------")
+set(VAR_BOOL1 "ON" CACHE BOOL "VAR bool 001")
+set(VAR_BOOL2 "OFF" CACHE BOOL "VAR bool 002")
+message("VAR_BOO1 = ${VAR_BOOL1}")
+message("VAR_BOO2 = ${VAR_BOOL2}")
+set(VAR_FILE "FILEPATH" CACHE FILEPATH "var FILEPATH")      # 文件选择
+set(VAR_PATH "FILEPATH" CACHE PATH "var PATH")              # 目录选择
+set(VAR_INTERNAL "INTERNAL" CACHE INTERNAL "var INTERNAL")
