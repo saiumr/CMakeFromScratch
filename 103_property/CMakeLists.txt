@@ -83,13 +83,20 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY TVAR "tval")
 get_property(val TARGET ${PROJECT_NAME} PROPERTY TVAR)
 message("TVAR = ${val}")
 
-# 给目标传递宏变量
+# 预置属性给目标传递宏变量
 set_property(TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS "PARA2=\"test_para2\"")
 # 直接写会覆盖PARA2
 # set_property(TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS "PARA3=\"test_para3\"")
 # 追加宏变量
 set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY COMPILE_DEFINITIONS "PARA3=\"test_para3\"")
 # 设置宏变量本质是生成命令中加-DPARA2="test_para2"...，只有追加（APPEND）会-DPARA2=... -DPARA3=...，否则就是最后一个生效
+
+message(----------------------------------------------------)
+
+# 打印目标属性
+include(CMakePrintHelpers)
+cmake_print_properties(TARGETS ${PROJECT_NAME}
+            PROPERTIES COMPILE_DEFINITIONS TVAR)
 
 message(----------------------------------------------------)
 
