@@ -39,3 +39,22 @@ message("TEST_APPEND_STRING = ${val}")
 
 message(----------------------------------------------------)
 
+# get_property SET | DEFINED
+set_property(GLOBAL PROPERTY P1 "p1")
+get_property(val GLOBAL PROPERTY P1 SET)        # 1
+message("P1 SET = ${val}")
+get_property(val GLOBAL PROPERTY P1 DEFINED)    # 0  只有调用define_property之后才会为1
+message("P1 DEFINED = ${val}")
+
+# 定义属性，不需要赋值
+define_property(GLOBAL PROPERTY TEST_DEF BRIEF_DOCS "test_def brief docs")
+get_property(val GLOBAL PROPERTY TEST_DEF DEFINED)
+message("TEST_DEF = ${val}")
+
+# 获取属性概要说明
+get_property(val GLOBAL PROPERTY TEST_DEF BRIEF_DOCS)
+message("TEST_DEF BRIEF_DOCS = ${val}")
+
+
+message(----------------------------------------------------)
+
