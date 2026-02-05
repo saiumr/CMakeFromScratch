@@ -55,6 +55,26 @@ message("TEST_DEF = ${val}")
 get_property(val GLOBAL PROPERTY TEST_DEF BRIEF_DOCS)
 message("TEST_DEF BRIEF_DOCS = ${val}")
 
+message(----------------------------------------------------)
+
+# 目录属性
+set_property(DIRECTORY . PROPERTY DIR1 "dir001")
+get_property(val DIRECTORY . PROPERTY DIR1)
+message("DIR1 = ${val}")
+# 获取子目录sub1中的目录属性
+get_property(val DIRECTORY sub1 PROPERTY DIR1)
+message("sub1 DIR1 = ${val}")
+
+message(----------------------------------------------------)
+
+# 文件属性
+set_property(SOURCE main.cpp PROPERTY S1 "s1 value")
+get_property(val SOURCE main.cpp PROPERTY S1)
+message("S1 = ${val}")
+
+# 预置属性设置 COMPILE_DEFINITIONS 传递宏变量
+set_property(SOURCE main.cpp PROPERTY COMPILE_DEFINITIONS "PARA1=7890")
+add_executable(${PROJECT_NAME} main.cpp)
 
 message(----------------------------------------------------)
 
