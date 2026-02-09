@@ -110,5 +110,24 @@ foreach(var RANGE 20)
 endforeach()
 message("out = ${out}")
 
+message("---------------------------------------------------")
+
+# while循环打印1~20之间的奇数
+# 防止死循环
+set(var 1)
+set(out "")
+while(var)
+    math(EXPR var "${var} + 1")
+    math(EXPR r "${var} % 2")
+    if(NOT r)
+        continue()
+    endif()
+    if(var GREATER 20)
+        break()
+    endif()
+    string(APPEND out ${var} " ")
+endwhile()
+message("out = ${out}")
+
 
 message("---------------------------------------------------")
