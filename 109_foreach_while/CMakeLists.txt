@@ -90,6 +90,25 @@ foreach(var1 var2 IN ZIP_LISTS arr1 arr2)
     message("${var1}-${var2}")
 endforeach()
 
+message("---------------------------------------------------")
+
+# break() continue()
+set(out "")
+foreach(var RANGE 20)
+    # 过滤3的倍数
+    math(EXPR re "${var} % 3")
+    # if(${re} EQUAL 0)
+    if(NOT re) # 0是false
+        continue()
+    endif()
+    
+    # 大于16退出
+    if(var GREATER 16)
+        break()
+    endif()
+    string(APPEND out ${var} "..")
+endforeach()
+message("out = ${out}")
 
 
 message("---------------------------------------------------")
