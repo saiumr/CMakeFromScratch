@@ -27,7 +27,7 @@ set(LIB OFF)
 # cmake 生成表达式调试方法（官方）
 # cmake -E echo "生成表达式"  --> cmake 执行指令
 # cmake --build build --target gen    ->   打印 STATIC=1
-add_custom_target(gen COMMAND ${CMAKE_COMMAND} -E echo "$<$<NOT:$<BOOL:${LIB}>>:STATIC=1>")
+# add_custom_target(gen COMMAND ${CMAKE_COMMAND} -E echo "$<$<NOT:$<BOOL:${LIB}>>:STATIC=1>")
 
 message("-----------------------------------------------")
 
@@ -50,6 +50,25 @@ message("CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
 # 条件表达式
 # $<IF:condition,true_string,false_string>
 set(LIB OFF)
-target_include_directories(cmake_exp PUBLIC "$<IF:$<BOOL:${LIB}>,ON_STRING,OFF_STRING>")
+# target_include_directories(cmake_exp PUBLIC "$<IF:$<BOOL:${LIB}>,ON_STRING,OFF_STRING>")
+
+message("-----------------------------------------------")
+
+# 字符串转换
+set(conf "Debug")
+set(exp "$<STREQUAL:$<LOWER_CASE:${conf}>,debug>")
+
+# target_include_directories(cmake_exp PUBLIC ${exp})
+
+# 目标相关查询
+# 生成对象的绝对路径（一般用于安装找寻路径）
+set(exp "$<TARGET_FILE:cmake_exp>")
+# cmake --build build --target gen 可以看到可执行文件的绝对路径
+# add_custom_target(gen COMMAND ${CMAKE_COMMAND} -E echo ${exp})   # 报错CMP0002是因为有重复指令，需要把前面的注释掉
+
+# 获取目标的属性
+set(exp "$<TARGET_PROPERTY:cmake_exp,NAME>")
+add_custom_target(gen COMMAND ${CMAKE_COMMAND} -E echo ${exp})
+
 
 message("-----------------------------------------------")
