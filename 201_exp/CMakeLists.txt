@@ -30,3 +30,26 @@ set(LIB OFF)
 add_custom_target(gen COMMAND ${CMAKE_COMMAND} -E echo "$<$<NOT:$<BOOL:${LIB}>>:STATIC=1>")
 
 message("-----------------------------------------------")
+
+# 字符串比较
+# $<STREQUAL:string1, string2>
+# $<EQUAL:string1, string2>
+# target_include_directories(cmake_exp PUBLIC "$<STREQUAL:string1,string1>")
+# target_include_directories(cmake_exp PUBLIC "$<EQUAL:9,9>")
+
+# 变量查询
+# $<CONFIG:cfgs>
+# $<CONFIG> Debug Release ...
+# target_include_directories(cmake_exp PUBLIC "$<CONFIG>")
+# target_include_directories(cmake_exp PUBLIC "$<CONFIG:Debug,Release>")
+
+# $<PLATFORM_ID:platform_ids>  platform_ids是系统名称，只有两个值：Windows，Linux
+message("CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
+# target_include_directories(cmake_exp PUBLIC "$<PLATFORM_ID:Windows,Linux>")
+
+# 条件表达式
+# $<IF:condition,true_string,false_string>
+set(LIB OFF)
+target_include_directories(cmake_exp PUBLIC "$<IF:$<BOOL:${LIB}>,ON_STRING,OFF_STRING>")
+
+message("-----------------------------------------------")
