@@ -12,7 +12,7 @@ void SLib() {
 add_library(slib STATIC slib.cpp)
 # 静态导入运行时库（使用MT，MultiThreaded）
 set_target_properties(slib PROPERTIES
-MSVC_RUNTIME_LIBRARY "MultiThreaded"    # 配置MSVC使用运行时库
+MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>"    # 配置MSVC使用运行时库，Debug版本用MTd，Release用MT
 )
 
 file(WRITE main.cpp [=[
@@ -29,8 +29,8 @@ int main() {
 add_executable(main main.cpp)
 # 需要统一配置成使用静态MT
 set_target_properties(main PROPERTIES
-MSVC_RUNTIME_LIBRARY "MultiThreaded"    # 配置MSVC使用运行时库
+MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>"    # 配置MSVC使用运行时库，Debug版本用MTd，Release用MT
 )
 target_link_libraries(main slib)
 
-
+# cmake --build build --config Release -v
