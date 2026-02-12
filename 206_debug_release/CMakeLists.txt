@@ -103,6 +103,14 @@ foreach(target dlib slib main)
         LIBRARY_OUTPUT_DIRECTORY ${OUT_LIB_PATH}/$<CONFIG>
         # windows动态库，以及 windows 和 linux 可执行文件输出路径
         RUNTIME_OUTPUT_DIRECTORY ${OUT_EXE_PATH}/$<CONFIG>
+
+        # Debug版本加后缀"d"
+        # DEBUG_POSTFIX "d"
+
+        # windows pdb调试文件输出路径
+        # PDB_OUTPUT_DIRECTORY ${OUT_LIB_PATH}/pdb
+        # PDB_OUTPUT_DIRECTORY_DEBUG ${OUT_LIB_PATH}/debug/pdb
+        # PDB_OUTPUT_DIRECTORY_RELEASE ${OUT_LIB_PATH}/release/pdb
     )
 endforeach()
 
