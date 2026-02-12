@@ -111,6 +111,10 @@ foreach(target dlib slib main)
         # PDB_OUTPUT_DIRECTORY ${OUT_LIB_PATH}/pdb
         # PDB_OUTPUT_DIRECTORY_DEBUG ${OUT_LIB_PATH}/debug/pdb
         # PDB_OUTPUT_DIRECTORY_RELEASE ${OUT_LIB_PATH}/release/pdb
+
+        # 配置vs调试路径 工作目录
+        # 根据编译类型设置别的路径：VS_DEBUGGER_WORKING_DIRECTORY $<IF:$<CONFIG:Debug>,any_path_1,any_path_2>
+        VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin/$<CONFIG>
     )
 endforeach()
 
