@@ -15,8 +15,8 @@ file(WRITE slib.cpp "void SLib() {}")
 add_library(slib STATIC slib.cpp include/slib.h include/slib_pri.h)
 
 # 设置头文件属性
-set_target_properties(slib PROPERTIES PUBLIC_HEADER  include/slb.h)
-set_target_properties(slib PROPERTIES PRIVATE_HEADER include/slb_pri.h)
+set_target_properties(slib PROPERTIES PUBLIC_HEADER  include/slib.h)
+set_target_properties(slib PROPERTIES PRIVATE_HEADER include/slib_pri.h)
 
 #####################################################################
 
@@ -63,6 +63,7 @@ target_link_libraries(main dlib slib)
 
 # 安装目标  DESTINATION 指定相对 CMAKE_INSTALL_PREFIX 的输出路径
 # cmake -S . -B build -DCMAKE_INSTALL_PREFIX=./out
+# cmake --build build
 # cmake --install build --config Debug    默认是Release
 # 和设置target输出路径不同，install是拷贝目标到指定目录
 set(CMAKE_INSTALL_PREFIX ./out)
@@ -86,4 +87,16 @@ PUBLIC_HEADER DESTINATION target_install/include  # 公开头文件
 PRIVATE_HEADER DESTINATION target_install/inc  # 内部头文件
 )
 
+# Debug Release不同输出路径
+install(TARGETS main
+CONFIGURATIONS Debug
+RUNTIME DESTINATION debug/bin
+)
+
+# cmake -S . -B build -DCMAKE_INSTALL_PREFIX=out -DCMAKE_BUILD_TYPE=Release    for linux,mingw,mac
+# cmake --build build --config Release                                         for MSVC
+install(TARGETS main
+CONFIGURATIONS Release RelWithDebInfo MinSizeRel
+RUNTIME DESTINATION release/bin
+)
 
