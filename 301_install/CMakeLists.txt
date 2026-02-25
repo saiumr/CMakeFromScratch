@@ -14,6 +14,10 @@ file(WRITE include/slib.h "void SLib();")
 file(WRITE slib.cpp "void SLib() {}")
 add_library(slib STATIC slib.cpp include/slib.h include/slib_pri.h)
 
+# 设置头文件属性
+set_target_properties(slib PROPERTIES PUBLIC_HEADER  include/slb.h)
+set_target_properties(slib PROPERTIES PRIVATE_HEADER include/slb_pri.h)
+
 #####################################################################
 
 # 动态库 在windows下需要导出
@@ -64,3 +68,22 @@ target_link_libraries(main dlib slib)
 set(CMAKE_INSTALL_PREFIX ./out)
 message("install prefix: ${CMAKE_INSTALL_PREFIX}")
 install(TARGETS slib dlib main DESTINATION bin)
+
+######################################################################
+#[=[
+目标分类：
+RUNTIME -> 执行程序、windows 动态链接库dll文件
+ARCHIVE -> 静态库、windows动态库导出符号
+LIBRARY -> linux .so 和 mac .dylib 动态库
+PUBLIC_HEADER, PRIVATE_HEADER -> 通过 set_target_properties 设定不同的头文件类型
+]=]
+
+install(TARGETS main dlib slib
+RUNTIME DESTINATION test_install/bin  # main.exe *.dll -> ./out/bin
+ARCHIVE DESTINATION test_install/lib
+LIBRARY DESTINATION test_install/lib  # for linux and mac
+PUBLIC_HEADER DESTINATION target_install/include  # 公开头文件
+PRIVATE_HEADER DESTINATION target_install/inc  # 内部头文件
+)
+
+
