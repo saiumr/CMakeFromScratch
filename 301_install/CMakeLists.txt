@@ -54,3 +54,13 @@ add_executable(main main.cpp)
 target_include_directories(main PUBLIC include)
 
 target_link_libraries(main dlib slib)
+
+######################################################################
+
+# 安装目标  DESTINATION 指定相对 CMAKE_INSTALL_PREFIX 的输出路径
+# cmake -S . -B build -DCMAKE_INSTALL_PREFIX=./out
+# cmake --install build --config Debug    默认是Release
+# 和设置target输出路径不同，install是拷贝目标到指定目录
+set(CMAKE_INSTALL_PREFIX ./out)
+message("install prefix: ${CMAKE_INSTALL_PREFIX}")
+install(TARGETS slib dlib main DESTINATION bin)
