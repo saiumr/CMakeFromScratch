@@ -31,3 +31,5 @@ target_link_libraries(main slib)
 # 头文件路径写在了属性中
 get_target_property(inc slib INTERFACE_INCLUDE_DIRECTORIES)
 message("INTERFACE_INCLUDE_DIRECTORIES = ${inc}")
+
+# find_package还可以根据版本导入库，多版本package共存，不写了...
